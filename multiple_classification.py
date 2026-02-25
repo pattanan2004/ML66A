@@ -53,55 +53,36 @@ default_map = {
     'Yes': 1
 }
 
-if(selected == 'bmi'):
-    st.title('bmi Classification')
-    
-    person_age = st.text_input('person_age')
-    person_gender = st.selectbox('person_gender', gender_map)
-    person_education = st.selectbox('person_education', education_map)
-    person_income = st.text_input('person_income') 
-    person_emp_exp = st.text_input('person_emp_exp')
-    person_home_ownership = st.selectbox('person_home_ownership', home_map)
-    bmi_amnt = st.text_input('bmi_amnt')
-    bmi_intent = st.selectbox('bmi_intent', intent_map)
-    bmi_int_rate = st.text_input('bmi_int_rate')
-    bmi_percent_income = st.text_input('bmi_percent_income')
-    cb_person_cred_hist_length = st.text_input('cb_person_cred_hist_length')
-    credit_score = st.text_input('credit_score')
-    previous_bmi_defaults_on_file = st.selectbox(
-        'previous_bmi_defaults_on_file',
-        default_map)
-    
+if selected == 'Bmi':
+    st.title('BMI Classification')
+ 
+    # รับค่า input ให้ตรงกับ dataset
+    gender = st.selectbox('Gender', ['Male', 'Female'])
+    height = st.text_input('Height (cm)')
+    weight = st.text_input('Weight (kg)')
+ 
     bmi_prediction = ''
-    
+ 
     if st.button('Predict'):
-        loan_prediction = loan_model.predict([
+ 
+        # แปลง Gender ให้เป็นตัวเลขตาม dataset
+        # จากรูป: 0 = Female, 1 = Male (ดูจากข้อมูลคุณอีกทีนะครับ)
+        if gender == 'Male':
+            gender_value = 1
+        else:
+            gender_value = 0
+ 
+        bmi_prediction = bmi_model.predict([
             [
-                float(person_age),
-                gender_map[person_gender],
-                education_map[person_education],
-                float(person_income),
-                float(person_emp_exp),
-                home_map[person_home_ownership],
-                float(loan_amnt),
-                intent_map[loan_intent],
-                float(loan_int_rate),
-                float(loan_percent_income),
-                float(cb_person_cred_hist_length),
-                float(credit_score),
-                default_map[previous_loan_defaults_on_file]
+                gender_value,
+                float(height),
+                float(weight)
             ]
         ])
-        
-        if (loan_prediction[0] == 0):
-            
-          loan_prediction = 'Not Accept'
-          
-        else:
-            
-          loan_prediction = 'Accept'
-          
-    st.success(loan_prediction)
+ 
+        bmi_prediction = bmi_prediction[0]
+ 
+    st.success(f'Predicted BMI Index: {bmi_prediction}')
 
 if(selected == 'Loan'):
     st.title('Loan Classification')
@@ -176,6 +157,7 @@ if(selected == 'Riding'):
           
 
     st.success(Riding_prediction)
+
 
 
 
