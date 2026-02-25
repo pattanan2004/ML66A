@@ -56,7 +56,6 @@ default_map = {
 if selected == 'bmi':
     st.title('bmi Classification')
  
-    # รับค่า input ให้ตรงกับ dataset
     gender = st.selectbox('Gender', ['Male', 'Female'])
     height = st.text_input('Height (cm)')
     weight = st.text_input('Weight (kg)')
@@ -65,14 +64,13 @@ if selected == 'bmi':
  
     if st.button('Predict'):
  
-        # แปลง Gender ให้เป็นตัวเลขตาม dataset
-        # จากรูป: 0 = Female, 1 = Male (ดูจากข้อมูลคุณอีกทีนะครับ)
+        # แปลง Gender เป็นตัวเลข (เช็คให้ตรงกับตอน train)
         if gender == 'Male':
             gender_value = 1
         else:
             gender_value = 0
  
-        bmi_prediction = bmi_model.predict([
+        prediction = bmi_model.predict([
             [
                 gender_value,
                 float(height),
@@ -80,9 +78,23 @@ if selected == 'bmi':
             ]
         ])
  
-        bmi_prediction = bmi_prediction[0]
+        index = prediction[0]
  
-    st.success(f'Predicted BMI Index: {bmi_prediction}')
+        # เพิ่มเกณฑ์แปลผลตรงนี้ 👇
+        if index == 0:
+            bmi_prediction = 'Extremely Weak'
+        elif index == 1:
+            bmi_prediction = 'Weak'
+        elif index == 2:
+            bmi_prediction = 'Normal'
+        elif index == 3:
+            bmi_prediction = 'Overweight'
+        elif index == 4:
+            bmi_prediction = 'Obesity'
+        elif index == 5:
+            bmi_prediction = 'Extreme Obesity'
+ 
+    st.success(f'Predicted BMI Category: {bmi_prediction}')
 
 if(selected == 'Loan'):
     st.title('Loan Classification')
@@ -157,6 +169,7 @@ if(selected == 'Riding'):
           
 
     st.success(Riding_prediction)
+
 
 
 
