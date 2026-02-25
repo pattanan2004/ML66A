@@ -53,8 +53,8 @@ default_map = {
     'Yes': 1
 }
 
-if(selected == 'BMI'):
-    st.title('BMI Classification')
+if(selected == 'bmi'):
+    st.title('bmi Classification')
     
     person_age = st.text_input('person_age')
     person_gender = st.selectbox('person_gender', gender_map)
@@ -62,10 +62,10 @@ if(selected == 'BMI'):
     person_income = st.text_input('person_income') 
     person_emp_exp = st.text_input('person_emp_exp')
     person_home_ownership = st.selectbox('person_home_ownership', home_map)
-    loan_amnt = st.text_input('loan_amnt')
-    loan_intent = st.selectbox('loan_intent', intent_map)
-    loan_int_rate = st.text_input('loan_int_rate')
-    loan_percent_income = st.text_input('loan_percent_income')
+    bmi_amnt = st.text_input('bmi_amnt')
+    bmi_intent = st.selectbox('bmi_intent', intent_map)
+    bmi_int_rate = st.text_input('bmi_int_rate')
+    bmi_percent_income = st.text_input('bmi_percent_income')
     cb_person_cred_hist_length = st.text_input('cb_person_cred_hist_length')
     credit_score = st.text_input('credit_score')
     previous_loan_defaults_on_file = st.selectbox(
@@ -176,6 +176,7 @@ if(selected == 'Riding'):
           
 
     st.success(Riding_prediction)
+
 
 
 
