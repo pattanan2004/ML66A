@@ -53,8 +53,8 @@ default_map = {
     'Yes': 1
 }
 
-if selected == 'Bmi':
-    st.title('BMI Classification')
+if selected == 'bmi':
+    st.title('bmi Classification')
  
     # รับค่า input ให้ตรงกับ dataset
     gender = st.selectbox('Gender', ['Male', 'Female'])
@@ -157,6 +157,7 @@ if(selected == 'Riding'):
           
 
     st.success(Riding_prediction)
+
 
 
 
