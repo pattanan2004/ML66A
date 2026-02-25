@@ -68,11 +68,11 @@ if(selected == 'bmi'):
     bmi_percent_income = st.text_input('bmi_percent_income')
     cb_person_cred_hist_length = st.text_input('cb_person_cred_hist_length')
     credit_score = st.text_input('credit_score')
-    previous_loan_defaults_on_file = st.selectbox(
-        'previous_loan_defaults_on_file',
+    previous_bmi_defaults_on_file = st.selectbox(
+        'previous_bmi_defaults_on_file',
         default_map)
     
-    loan_prediction = ''
+    bmi_prediction = ''
     
     if st.button('Predict'):
         loan_prediction = loan_model.predict([
@@ -176,6 +176,7 @@ if(selected == 'Riding'):
           
 
     st.success(Riding_prediction)
+
 
 
 
